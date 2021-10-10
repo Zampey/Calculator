@@ -19,33 +19,47 @@ public class Main {
 
 
         float calculated = numsAsFloat[0];
+        float[] subtotal = new float[operations.length];
+        float[] subtotalB = new float[operations.length];
+        int counter = 0;
+
+        for (int j = 0; j <operations.length; j++){
+
+            if (operations[j] == '*' || operations[j] == '/'){
+                switch (operations[j]){
+                    case '*' -> subtotal[j] = numsAsFloat[j] * numsAsFloat[j+1];
+                    case '/' -> subtotal[j] = numsAsFloat[j] / numsAsFloat[j+1];
+                }
+                subtotalB[counter] = subtotal[j];
+                counter++;
+            }
+            subtotalB[counter] = numsAsFloat[j];
+            counter++;
+
+            System.out.println(subtotalB[j]);
+        }
+
 
         for (int i = 0; i < operations.length; i++) {
-                char operator = operations[i];
-                char nextOperator =operations[i+1];
 
-            if ((nums.length - i) > 1) {
+            int ioobFixer = i;
+            char operator = operations[i];
 
-
-
-                switch (operator) {
-                    case '+' -> calculated += numsAsFloat[i + 1];
-                    case '-' -> calculated -= numsAsFloat[i + 1];
-                    case '*' -> calculated *= numsAsFloat[i + 1];
-                    case '/' -> calculated /= numsAsFloat[i + 1];
-
-                }
-            } else {
+            if ((nums.length - i) > 1) ioobFixer++;
 
                 switch (operator) {
-                    case '+' -> calculated += numsAsFloat[i];
-                    case '-' -> calculated -= numsAsFloat[i];
-                    case '*' -> calculated *= numsAsFloat[i];
-                    case '/' -> calculated /= numsAsFloat[i];
-                }
-            }
+                    case '+' -> calculated += numsAsFloat[ioobFixer];
+                    case '-' -> calculated -= numsAsFloat[ioobFixer];
+                    case '*', '/' -> calculated += subtotal[i];
 
-            System.out.println(calculated);
+                }
+
+            System.out.print(calculated + ", ");
         }
+        System.out.println();
+        System.out.println(calculated);
+        System.out.println();
+
+
     }
 }
