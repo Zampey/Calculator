@@ -1,8 +1,9 @@
-import java.util.Arrays;
+
 
 public class Main {
 
     public static void main(String[] args) {
+
         Splitter splitter = new Splitter();
         Holder output = splitter.split();
 
@@ -14,51 +15,26 @@ public class Main {
             numsAsFloat[j] = Float.parseFloat(nums[j]);
         }
 
-        System.out.println(Arrays.toString(output.getNums()));
-        System.out.println(Arrays.toString(output.getOperations()));
-
-
         float calculated = numsAsFloat[0];
-        float[] subtotal = new float[operations.length];
-        float[] subtotalB = new float[operations.length];
-        int counter = 0;
+        for (int i = 0; i < operations.length;i++){
+            int helper = i;
+            if (operations.length - i >= 1) helper++;
 
-        for (int j = 0; j <operations.length; j++){
-
-            if (operations[j] == '*' || operations[j] == '/'){
-                switch (operations[j]){
-                    case '*' -> subtotal[j] = numsAsFloat[j] * numsAsFloat[j+1];
-                    case '/' -> subtotal[j] = numsAsFloat[j] / numsAsFloat[j+1];
-                }
-                subtotalB[counter] = subtotal[j];
-                counter++;
+            switch (operations[i]){
+                case '+' -> calculated += numsAsFloat[helper];
+                case '-' -> calculated -= numsAsFloat[helper];
+                case '*' -> calculated *= numsAsFloat[helper];
+                case '/' -> calculated /= numsAsFloat[helper];
             }
-            subtotalB[counter] = numsAsFloat[j];
-            counter++;
-
-            System.out.println(subtotalB[j]);
         }
+        System.out.print(calculated);
 
 
-        for (int i = 0; i < operations.length; i++) {
+        //--- GUI --- //
 
-            int ioobFixer = i;
-            char operator = operations[i];
+        Frame frame = new Frame(calculated);
 
-            if ((nums.length - i) > 1) ioobFixer++;
 
-                switch (operator) {
-                    case '+' -> calculated += numsAsFloat[ioobFixer];
-                    case '-' -> calculated -= numsAsFloat[ioobFixer];
-                    case '*', '/' -> calculated += subtotal[i];
-
-                }
-
-            System.out.print(calculated + ", ");
-        }
-        System.out.println();
-        System.out.println(calculated);
-        System.out.println();
 
 
     }
