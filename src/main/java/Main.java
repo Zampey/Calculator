@@ -1,4 +1,4 @@
-
+import util.Holder;
 
 public class Main {
 
@@ -31,11 +31,6 @@ public class Main {
 
 
         //--- GUI --- //
-
         Frame frame = new Frame(calculated);
-
-
-
-
     }
 }
