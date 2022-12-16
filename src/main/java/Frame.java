@@ -7,13 +7,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Frame extends JFrame {
-        Frame(float result){
+        Frame(){
             Font myFont = new Font("Arial", Font.PLAIN, 45);
 
             JLabel calculatingPreview = new JLabel();
             Border border = BorderFactory.createLineBorder(Color.gray, 3);
             calculatingPreview.setBounds(0,35,334,100);
-            calculatingPreview.setText(Float.toString(result));
             calculatingPreview.setForeground(Color.white);
             calculatingPreview.setFont(myFont);
             calculatingPreview.setBorder(border);
@@ -42,13 +41,17 @@ public class Frame extends JFrame {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         String labelVal = calculatingPreview.getText();
-                        if (numbers[finalI]=="←"){
-                            StringBuffer sb= new StringBuffer(labelVal);
-                            sb.deleteCharAt(sb.length()-1);
+                        if (numbers[finalI]=="←") {
+                            StringBuffer sb = new StringBuffer(labelVal);
+                            sb.deleteCharAt(sb.length() - 1);
                             calculatingPreview.setText(String.valueOf(sb));
+                        }else if(numbers[finalI]=="="){
+                            String result = String.valueOf(Main.calculationProcess(labelVal));
+                            System.out.println(result);
+                            calculatingPreview.setText(result);
                         }else{
-                            if (String.valueOf(labelVal.charAt(labelVal.length()-1)).equals(numbers[finalI])){
-                                if (operators.indexOf(labelVal.charAt(labelVal.length()-1)) ==-1 && operators.indexOf(numbers[finalI])==-1){
+                            if (operators.indexOf(numbers[finalI])!=-1){
+                                if (operators.indexOf(labelVal.charAt(labelVal.length()-1)) ==-1){
                                     calculatingPreview.setText(labelVal+numbers[finalI]);
                                 }
                             }else{
@@ -64,7 +67,7 @@ public class Frame extends JFrame {
                 });
                 bottomPanel.add(numButtons[i]);
             }
-            bottomPanel.setBackground(Color.blue);
+            bottomPanel.setBackground(Color.DARK_GRAY);
             bottomPanel.setLayout(new GridLayout(5,4));
             bottomPanel.setBounds(2,150,330,345);
 

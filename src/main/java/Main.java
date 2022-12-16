@@ -5,9 +5,11 @@ import java.util.Arrays;
 public class Main {
 
     public static void main(String[] args) {
-        Frame frame = new Frame(20);
+        Frame frame = new Frame();
+    }
+    public static float calculationProcess(String example){
         Splitter splitter = new Splitter();
-        Holder output = splitter.split();
+        Holder output = splitter.split(example);
 
         String[] nums = output.getNums();
         char[] operations = output.getOperations();
@@ -26,10 +28,6 @@ public class Main {
                 case '/' -> valueHolder /= numsAsFloat[helper];
             }
         }
-        System.out.print(valueHolder);
-
-
-        //--- GUI --- //
-        //Frame frame = new Frame(valueHolder);
+        return valueHolder;
     }
 }

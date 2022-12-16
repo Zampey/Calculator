@@ -4,12 +4,9 @@ import java.util.Scanner;
 
 public class Splitter {
 
-    public Holder split(){
-        Scanner scanner = new Scanner(System.in);
-
-        String inputExample = scanner.nextLine();
-        char[] exampleChars = inputExample.toCharArray();
-        String[] nums = inputExample.split("[*/+-]");
+    public Holder split(String example){
+        char[] exampleChars = example.toCharArray();
+        String[] nums = example.split("[*/+-]");
         char[] operations = new char[(nums.length)-1];
 
         //splitting operators from another input and putting them to array
